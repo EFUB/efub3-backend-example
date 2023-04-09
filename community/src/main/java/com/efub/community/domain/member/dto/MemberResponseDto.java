@@ -9,14 +9,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberResponseDto {
-	private Long memberId;
 	private String email;
 	private String nickname;
 	private String university;
 	private Integer studentNo;
 
 	public MemberResponseDto(Member member) {
-		this.memberId = member.getMemberId();
 		this.email = member.getEmail();
 		this.nickname = member.getNickname();
 		this.university = member.getUniversity();
