@@ -2,6 +2,7 @@ package com.efub.community.domain.board.service;
 
 import com.efub.community.domain.board.domain.Board;
 import com.efub.community.domain.board.dto.request.BoardRequestDto;
+import com.efub.community.domain.board.dto.request.MemberInfoRequestDto;
 import com.efub.community.domain.board.repository.BoardRepository;
 import com.efub.community.domain.member.domain.Member;
 import com.efub.community.domain.member.service.MemberService;
@@ -52,7 +53,7 @@ public class BoardService {
 	@Transactional(readOnly = true)
 	public Board findById(Long boardId) {
 		return boardRepository.findById(boardId)
-				.orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + boardId));
+				.orElseThrow(() -> new IllegalArgumentException("해당 게시판이 없습니다. id=" + boardId));
 	}
 	@Transactional(readOnly = true)
 	public List<Board> findAllDesc() {

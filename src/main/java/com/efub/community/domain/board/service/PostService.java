@@ -2,6 +2,7 @@ package com.efub.community.domain.board.service;
 
 import com.efub.community.domain.board.domain.Board;
 import com.efub.community.domain.board.domain.Post;
+import com.efub.community.domain.board.dto.request.MemberInfoRequestDto;
 import com.efub.community.domain.board.dto.request.PostRequestDto;
 import com.efub.community.domain.board.repository.PostRepository;
 import com.efub.community.domain.member.domain.Member;
@@ -21,6 +22,7 @@ public class PostService {
 	private final PostRepository postRepository;
 	private final MemberService memberService; //서비스 안에서 다른 서비스 호출 가능
 	private final BoardService boardService;
+	private final Integer HOT_COUNT = 10;
 
 
 	public Long create(Long boardId, PostRequestDto requestDto) {
@@ -48,6 +50,10 @@ public class PostService {
 		{
 			throw new IllegalArgumentException();
 		}
+	}
+	@Transactional(readOnly = true)
+	public List<Post> getHotList(){
+		return postRepository.findPopularPosts(HOT_COUNT);
 	}
 
 	@Transactional(readOnly = true)

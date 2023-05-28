@@ -1,9 +1,9 @@
 package com.efub.community.domain.member.service;
 
 import com.efub.community.domain.member.domain.Member;
-import com.efub.community.domain.member.dto.LoginRequestDto;
-import com.efub.community.domain.member.dto.MemberUpdateRequestDto;
-import com.efub.community.domain.member.dto.SignUpRequestDto;
+import com.efub.community.domain.member.dto.request.LoginRequestDto;
+import com.efub.community.domain.member.dto.request.MemberUpdateRequestDto;
+import com.efub.community.domain.member.dto.request.SignUpRequestDto;
 import com.efub.community.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -61,15 +61,15 @@ public class MemberService {
 	}
 
 	@Transactional(readOnly = true)
-	public Member findById(Long id) {
-		return memberRepository.findByMemberId(id)
-				.orElseThrow(() -> new EntityNotFoundException("해당 id 를 가진 member 를 찾을 수 없습니다. id ="+id));
-	}
-
-	@Transactional(readOnly = true)
 	public Member findByStudentNo(Integer studentNo){
 		return memberRepository.findByStudentNo(studentNo)
 				.orElseThrow(() -> new EntityNotFoundException("해당 학번을 가진 Member 를 찾을 수 없습니다."));
+	}
+
+	@Transactional(readOnly = true)
+	public Member findById(Long id) {
+		return memberRepository.findByMemberId(id)
+				.orElseThrow(() -> new EntityNotFoundException("해당 id 를 가진 member 를 찾을 수 없습니다. id ="+id));
 	}
 
 	@Transactional(readOnly=true)

@@ -1,4 +1,4 @@
-package com.efub.community.domain.member.dto;
+package com.efub.community.domain.member.dto.request;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -12,7 +12,7 @@ import javax.validation.constraints.Pattern;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class LoginRequestDto {
-	@NotNull(message = "학번을 필수 입니다.")
+	@NotNull(message = "학번은 필수로 입력해야 합니다. ")
 	private Integer studentNo;
 
 	@NotBlank(message = "비밀번호는 필수입니다.")//해당 값이 null이 아니고, 공백(""과 " " 모두 포함)이 아닌지 검증

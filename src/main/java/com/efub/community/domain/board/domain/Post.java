@@ -26,7 +26,7 @@ public class Post extends BaseTimeEntity {
 	@Column(columnDefinition = "TEXT")// @NotNull은 @Column(nullable=false)의 역할도 같이 하므로 생략
 	private String content;
 
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne//(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "post_id", insertable = false, updatable = false)
 	private Board board;
 
@@ -36,6 +36,9 @@ public class Post extends BaseTimeEntity {
 
 	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Comment> commentList = new ArrayList<>();
+
+	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<PostHeart> postHeartList = new ArrayList<>();
 	private boolean anonymous;
 
 
@@ -53,6 +56,7 @@ public class Post extends BaseTimeEntity {
 	{
 		this.content = content;
 	}
+
 
 }
 

@@ -16,9 +16,15 @@ public class BoardRequestDto {
 	@NotBlank(message = "제목은 필수로 입력되어야 합니다.")
 	private String name;
 
-	@NotNull(message = "멤버 id는 필수로 입력되어야 합니다. ")
+	@NotNull(message = "회원은 필수로 입력되어야 합니다.")
 	private Long memberId;
 	private String description;
+
+	public BoardRequestDto(String name, Long memberId, String description) {
+		this.name = name;
+		this.memberId = memberId;
+		this.description = description;
+	}
 
 	public Board toEntity(Member member){
 		return Board.builder()

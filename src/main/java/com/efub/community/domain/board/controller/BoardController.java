@@ -2,6 +2,7 @@ package com.efub.community.domain.board.controller;
 
 import com.efub.community.domain.board.domain.Board;
 import com.efub.community.domain.board.dto.request.BoardRequestDto;
+import com.efub.community.domain.board.dto.request.MemberInfoRequestDto;
 import com.efub.community.domain.board.dto.response.BoardListResponseDto;
 import com.efub.community.domain.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -54,7 +55,7 @@ public class BoardController {
 
 	@DeleteMapping("/{boardId}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public String deleteBoard(@PathVariable final Long boardId, @RequestParam final Long memberId) {
+	public String deleteBoard(@PathVariable final Long boardId,@RequestParam final Long memberId) {
 		boardService.delete(boardId, memberId);
 		return "성공적으로 삭제되었습니다.";
 	}

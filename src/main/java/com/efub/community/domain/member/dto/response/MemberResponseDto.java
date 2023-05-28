@@ -1,4 +1,4 @@
-package com.efub.community.domain.member.dto;
+package com.efub.community.domain.member.dto.response;
 
 import com.efub.community.domain.member.domain.Member;
 import lombok.AccessLevel;
@@ -15,7 +15,6 @@ public class MemberResponseDto {
 	private String university;
 	private Integer studentNo;
 
-	@Builder
 	public MemberResponseDto(Member member) {
 		this.accountId = member.getMemberId();
 		this.email = member.getEmail();

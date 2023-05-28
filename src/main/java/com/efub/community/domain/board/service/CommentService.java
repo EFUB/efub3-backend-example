@@ -3,9 +3,12 @@ package com.efub.community.domain.board.service;
 import com.efub.community.domain.board.domain.Comment;
 import com.efub.community.domain.board.domain.Post;
 import com.efub.community.domain.board.dto.request.CommentRequestDto;
+import com.efub.community.domain.board.dto.request.MemberInfoRequestDto;
 import com.efub.community.domain.board.repository.CommentRepository;
 import com.efub.community.domain.member.domain.Member;
 import com.efub.community.domain.member.service.MemberService;
+import com.efub.community.domain.notification.entity.NotificationType;
+import com.efub.community.domain.notification.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,14 +24,18 @@ public class CommentService {
 
 	private final PostService postService;
 	private final MemberService memberService;
+	private final NotificationService notificationService;
 
 
 	public Long create(CommentRequestDto requestDto, Long postId) {
-		Member member = memberService.findById(requestDto.getMemberId());
+		Member writer = memberService.findById(requestDto.getMemberId());
 		Post post = postService.findById(postId);
-		Comment comment = requestDto.toEntity(member);
+		Comment comment = requestDto.toEntity(writer);
 		comment.setPost(post);
 		commentRepository.save(comment);
+		if(writer.getMemberId() != post.getWriter().getMemberId()){
+			notificationService.createNotification(NotificationType.COMMENT, post.getWriter());
+		}
 		return comment.getCommentId();
 	}
 
